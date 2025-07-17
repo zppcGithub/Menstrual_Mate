@@ -16,7 +16,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(ResourceNotFoundException.class)
     public ResponseEntity<ApiResponse<?>> handleResourceNotFoundException(ResourceNotFoundException ex) {
-        ApiResponse<?>> response = ApiResponse.error(ex.getMessage());
+        ApiResponse<?> response = ApiResponse.error(ex.getMessage());
         return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
     }
 
@@ -29,14 +29,14 @@ public class GlobalExceptionHandler {
             errors.put(fieldName, errorMessage);
         });
         
-        ApiResponse<?>> response = ApiResponse.error("Validation failed");
+        ApiResponse<Map<String, String>> response = ApiResponse.error("Validation failed");
         response.setData(errors);
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ApiResponse<?>> handleGlobalException(Exception ex) {
-        ApiResponse<?>> response = ApiResponse.error("An unexpected error occurred: " + ex.getMessage());
+        ApiResponse<String> response = ApiResponse.error("An unexpected error occurred: " + ex.getMessage());
         return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }
