@@ -1,0 +1,45 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: menstrual-mate-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root123
+      MYSQL_DATABASE: menstrual_mate
+      MYSQL_USER: menstrual_user
+      MYSQL_PASSWORD: mate123
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./database-schema.sql:/docker-entrypoint-initdb.d/01-schema.sql
+      - ./database-config.md:/docker-entrypoint-initdb.d/02-data.sql
+    networks:
+      - menstrual-network
+    restart: unless-stopped
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: menstrual-mate-backend
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mysql
+    volumes:
+      - ./backend/logs:/app/logs
+    networks:
+      - menstrual-network
+    restart: unless-stopped
+
+volumes:
+  mysql_data:
+    driver: local
+
+networks:
+  menstrual-network:
+    driver: bridge
