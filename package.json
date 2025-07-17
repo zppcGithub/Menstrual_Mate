@@ -1,0 +1,47 @@
+{
+  "name": "menstrual-mate",
+  "version": "1.0.0",
+  "description": "经期伴侣 - 现代化生理周期跟踪应用",
+  "main": "electron/main.js",
+  "scripts": {
+    "dev": "concurrently \"npm run dev:backend\" \"npm run dev:frontend\"",
+    "dev:backend": "cd backend && mvn spring-boot:run",
+    "dev:frontend": "cd frontend && npm run dev",
+    "build": "npm run build:frontend && npm run build:electron",
+    "build:frontend": "cd frontend && npm run build",
+    "build:electron": "electron-builder",
+    "build:win": "electron-builder --win",
+    "build:mac": "electron-builder --mac",
+    "build:linux": "electron-builder --linux",
+    "docker:up": "docker-compose up -d",
+    "docker:down": "docker-compose down",
+    "test": "npm run test:backend && npm run test:frontend",
+    "test:backend": "cd backend && mvn test",
+    "test:frontend": "cd frontend && npm run test"
+  },
+  "build": {
+    "appId": "com.menstrualmate.app",
+    "productName": "经期伴侣",
+    "directories": {
+      "output": "dist-electron"
+    },
+    "files": [
+      "electron/**/*",
+      "frontend/dist/**/*"
+    ],
+    "mac": {
+      "category": "public.app-category.health"
+    },
+    "win": {
+      "target": "nsis"
+    },
+    "linux": {
+      "target": "AppImage"
+    }
+  },
+  "devDependencies": {
+    "electron": "^30.0.0",
+    "electron-builder": "^24.0.0",
+    "concurrently": "^8.2.2"
+  }
+}

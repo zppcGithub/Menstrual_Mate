@@ -5,19 +5,22 @@ services:
     image: mysql:8.0
     container_name: menstrual-mate-mysql
     environment:
-      MYSQL_ROOT_PASSWORD: root123
+      MYSQL_ROOT_PASSWORD: rootpassword
       MYSQL_DATABASE: menstrual_mate
       MYSQL_USER: menstrual_user
-      MYSQL_PASSWORD: mate123
+      MYSQL_PASSWORD: menstrual_pass
     ports:
       - "3306:3306"
     volumes:
       - mysql_data:/var/lib/mysql
       - ./database-schema.sql:/docker-entrypoint-initdb.d/01-schema.sql
-      - ./database-config.md:/docker-entrypoint-initdb.d/02-data.sql
     networks:
       - menstrual-network
     restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      timeout: 20s
+      retries: 10
 
   backend:
     build:
@@ -26,12 +29,29 @@ services:
     container_name: menstrual-mate-backend
     environment:
       - SPRING_PROFILES_ACTIVE=docker
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/menstrual_mate?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+      - SPRING_DATASOURCE_USERNAME=menstrual_user
+      - SPRING_DATASOURCE_PASSWORD=menstrual_pass
     ports:
       - "8080:8080"
     depends_on:
-      - mysql
+      mysql:
+        condition: service_healthy
     volumes:
       - ./backend/logs:/app/logs
+    networks:
+      - menstrual-network
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: menstrual-mate-frontend
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
     networks:
       - menstrual-network
     restart: unless-stopped
