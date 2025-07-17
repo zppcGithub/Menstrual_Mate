@@ -57,13 +57,36 @@
 - MySQL 8.0
 - Docker容器化
 
-### 阶段4：核心业务实现 📋
-**待完成**：
-- [ ] 周期记录API (/api/cycles)
-- [ ] 每日记录API (/api/daily-records)
-- [ ] 日历视图API (/api/calendar-view)
-- [ ] 数据分析API (/api/analysis/*)
-- [ ] 健康提示API (/api/tips/*)
+### 阶段4：核心业务实现 ✅
+**时间**：2025-07-17
+**内容**：
+- ✅ 周期记录API (/api/cycles) - 完整的CRUD操作和预测功能
+- ✅ 每日记录API (/api/daily-records) - 支持症状记录和每日详情
+- ✅ 日历视图API (/api/calendar) - 月度视图和每日事件
+- ✅ 数据分析API (/api/calendar/analysis) - 统计分析数据
+- ✅ 健康提示API (/api/tips/*) - 按阶段和类别获取提示
+
+**技术特性**：
+- RESTful API设计，统一响应格式
+- 全局异常处理
+- Swagger/OpenAPI文档支持
+- 完整的单元测试和集成测试
+- 支持Docker容器化一键启动
+
+**API端点**：
+- GET /api/cycles - 获取所有周期记录
+- POST /api/cycles - 创建周期记录（自动计算长度）
+- GET /api/cycles/predict - 预测下次周期
+- GET /api/daily-records - 获取每日记录
+- GET /api/calendar/view - 获取日历视图
+- GET /api/tips - 获取健康提示
+
+**测试覆盖**：
+- 单元测试：Service层和Controller层
+- 集成测试：端到端API测试
+- 测试环境：H2内存数据库
+- API文档：Swagger/OpenAPI集成
+- 测试文档：完整API测试用例
 
 ### 阶段5：前端开发 📋
 **待完成**：
@@ -87,7 +110,7 @@
 - 代码审查：每个阶段通过CLAUDE.md记录进展
 
 ## 当前状态
-🔄 **当前阶段**：后端框架搭建完成，准备开始阶段4核心业务API实现
+🔄 **当前阶段**：阶段4核心业务API开发完成，准备开始阶段5前端Vue 3开发
 
 ## 待记忆事项
 - to memorize
