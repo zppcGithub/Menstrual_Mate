@@ -38,12 +38,24 @@
 - `database-schema.sql` - 完整数据库脚本
 - `database-config.md` - 配置说明文档
 
-### 阶段3：后端框架搭建 📋
-**待完成**：
-- [ ] 创建Spring Boot项目结构
-- [ ] 配置application.yml
-- [ ] 设置JPA实体类
-- [ ] 创建基础Repository/Service/Controller层
+### 阶段3：后端框架搭建 ✅
+**时间**：2025-07-17
+**内容**：
+- ✅ 创建完整的Spring Boot项目结构
+- ✅ 配置application.yml（支持Docker环境变量）
+- ✅ 创建所有7个JPA实体类映射数据库表
+- ✅ 实现基础Repository层（7个Repository接口）
+- ✅ 配置Docker容器化支持
+  - 创建docker-compose.yml（MySQL + 后端服务）
+  - 创建Dockerfile（Spring Boot）
+  - 支持一键启动：`docker-compose up -d`
+
+**技术栈**：
+- Spring Boot 3.2.0
+- Java 17
+- Spring Data JPA
+- MySQL 8.0
+- Docker容器化
 
 ### 阶段4：核心业务实现 📋
 **待完成**：
@@ -75,4 +87,7 @@
 - 代码审查：每个阶段通过CLAUDE.md记录进展
 
 ## 当前状态
-🔄 **当前阶段**：数据库设计完成，准备开始后端Spring Boot框架搭建
+🔄 **当前阶段**：后端框架搭建完成，准备开始阶段4核心业务API实现
+
+## 待记忆事项
+- to memorize
