@@ -189,3 +189,25 @@ mvn test           # 单元测试通过
 ```
 
 **GitHub Issue**：https://github.com/zppcGithub/Menstrual_Mate/issues/1
+
+## Lombok配置优化记录
+**时间**：2025-07-19
+**问题**：Eclipse中Lombok注解不生效
+**修复内容**：
+1. ✅ **更新POM文件**：添加Maven编译器插件配置和Lombok版本
+2. ✅ **优化Lombok支持**：
+   - 添加maven-compiler-plugin配置
+   - 明确指定annotationProcessorPaths
+   - 设置lombok.version为1.18.30
+3. ✅ **创建配置文档**：
+   - `backend/ECLIPSE_SETUP.md` - Eclipse Lombok配置指南
+   - `backend/LOMBOK_FIX.md` - Lombok问题解决方案
+
+**验证结果**：
+- ✅ `mvn clean compile` - 主代码编译成功
+- ✅ 项目结构完整，所有文件已更新
+- ✅ Eclipse配置文档已就绪
+
+**新文件**：
+- `backend/ECLIPSE_SETUP.md` - 详细Eclipse配置步骤
+- `backend/LOMBOK_FIX.md` - Lombok问题排查指南
