@@ -30,6 +30,7 @@ com\menstrualmate\entity\DailyRecord$MenstrualFlow.class
 com\menstrualmate\repository\UserRepository.class
 com\menstrualmate\dto\CycleRecordDTO.class
 com\menstrualmate\MenstrualMateApplication.class
+com\menstrualmate\config\CorsConfig.class
 com\menstrualmate\controller\DailyRecordController.class
 com\menstrualmate\controller\DataController.class
 com\menstrualmate\entity\Symptom.class
