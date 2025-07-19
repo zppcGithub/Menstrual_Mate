@@ -26,4 +26,6 @@ public interface CycleRecordRepository extends JpaRepository<CycleRecord, Long> 
     Double findAveragePeriodLength(@Param("userId") Long userId);
     
     CycleRecord findFirstByUserOrderByStartDateDesc(User user);
+    
+    List<CycleRecord> findAllByOrderByStartDateAsc();
 }

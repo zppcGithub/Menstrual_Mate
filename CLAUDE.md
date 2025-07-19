@@ -163,3 +163,29 @@
 - **跨平台支持**：Web、桌面、移动端全覆盖
 - **容器化部署**：Docker一键部署，易于扩展
 - **用户体验**：响应式设计，深色模式，本地备份
+
+## 修复Eclipse编译错误记录
+**时间**：2025-07-19
+**问题**：Eclipse打开backend项目时出现大量编译错误
+**修复内容**：
+1. ✅ **修复POM文件依赖重复**：移除com.h2database:h2的重复声明
+2. ✅ **修复CalendarService架构**：
+   - 将CalendarService从类改为接口
+   - CalendarServiceImpl正确实现CalendarService接口
+3. ✅ **修复Repository层**：
+   - CycleRecordRepository添加findAllByOrderByStartDateAsc方法
+   - SymptomRecordRepository添加findSymptomFrequency方法，并添加Map导入
+4. ✅ **修复ServiceImpl依赖**：CalendarServiceImpl添加DailyRecordRepository注入
+5. ✅ **修复语法错误**：修复文件末尾缺少的大括号
+
+**修复结果**：项目成功编译，运行`mvn clean compile`通过
+**测试状态**：单元测试通过，集成测试因数据依赖问题失败（非编译错误）
+
+**验证命令**：
+```bash
+cd backend
+mvn clean compile  # 成功
+mvn test           # 单元测试通过
+```
+
+**GitHub Issue**：https://github.com/zppcGithub/Menstrual_Mate/issues/1

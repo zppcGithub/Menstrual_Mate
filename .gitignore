@@ -161,3 +161,4 @@ backend/target/
 frontend/node_modules/
 frontend/dist/
 frontend/.env.local
+/.metadata/

@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
 
 @Repository
 public interface SymptomRecordRepository extends JpaRepository<SymptomRecord, SymptomRecordId> {
@@ -26,4 +27,7 @@ public interface SymptomRecordRepository extends JpaRepository<SymptomRecord, Sy
     List<SymptomRecord> findBySymptomTypeAndDateRange(@Param("type") Symptom.SymptomType type, 
                                                      @Param("startDate") LocalDate startDate, 
                                                      @Param("endDate") LocalDate endDate);
+    
+    @Query("SELECT s.name as name, COUNT(sr) as count FROM SymptomRecord sr JOIN sr.symptom s GROUP BY s.id, s.name ORDER BY count DESC")
+    List<Map<String, Object>> findSymptomFrequency();
 }

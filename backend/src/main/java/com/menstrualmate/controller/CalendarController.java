@@ -41,4 +41,16 @@ public class CalendarController {
         Map<String, Object> analysis = calendarService.getAnalysisData(startDate, endDate);
         return ResponseEntity.ok(ApiResponse.success(analysis));
     }
+
+    @GetMapping("/analysis/trends")
+    public ResponseEntity<ApiResponse<Map<String, Object>>> getAnalysisTrends() {
+        Map<String, Object> trends = calendarService.getAnalysisTrends();
+        return ResponseEntity.ok(ApiResponse.success(trends));
+    }
+
+    @GetMapping("/analysis/symptom-frequency")
+    public ResponseEntity<ApiResponse<Map<String, Object>>> getSymptomFrequency() {
+        Map<String, Object> frequency = calendarService.getSymptomFrequency();
+        return ResponseEntity.ok(ApiResponse.success(frequency));
+    }
 }
