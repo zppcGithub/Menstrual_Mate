@@ -15,7 +15,9 @@
       "Bash(npm create:*)",
       "Bash(npm install)",
       "Bash(docker-compose:*)",
-      "Bash(docker-compose build:*)"
+      "Bash(docker-compose build:*)",
+      "Bash(git clean:*)",
+      "Bash(git pull:*)"
     ],
     "deny": []
   }

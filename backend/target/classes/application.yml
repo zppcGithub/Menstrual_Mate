@@ -1,19 +1,19 @@
 server:
-  port: 8080
+  port: 9890
 
 spring:
   application:
     name: menstrual-mate-backend
   
   datasource:
-    url: jdbc:mysql://mysql:3306/menstrual_mate?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B8
-    username: root
-    password: root123
+    url: jdbc:mysql://localhost:3306/menstrual_mate?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B8&allowPublicKeyRetrieval=true
+    username: menstrual_user
+    password: menstrual_pass
     driver-class-name: com.mysql.cj.jdbc.Driver
   
   jpa:
     hibernate:
-      ddl-auto: none
+      ddl-auto: update
     show-sql: true
     properties:
       hibernate:
@@ -24,7 +24,17 @@ spring:
   sql:
     init:
       data-locations: classpath:data.sql
-      mode: always
+      mode: never
+
+---
+spring:
+  config:
+    activate:
+      on-profile: docker
+  datasource:
+    url: jdbc:mysql://mysql:3306/menstrual_mate?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B8
+    username: menstrual_user
+    password: menstrual_pass
 
 logging:
   level:
